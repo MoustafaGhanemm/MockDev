@@ -1,8 +1,8 @@
 # MockDev
 
-MockDev is an AI-powered technical interview platform that simulates a realistic software engineering interview from prompt to debrief.
+MockDev is a technical interview platform that combines interviewer orchestration, a live coding workspace, sandboxed code execution, and session persistence in a single web application.
 
-It combines an interviewer agent, a live coding workspace, safe code execution, session memory, and optional voice support into one product designed for interview practice.
+The system is designed to support structured software engineering interview practice with realistic problem delivery, follow-up questioning, code execution, and end-of-session review.
 
 ## What it does
 
@@ -11,10 +11,6 @@ It combines an interviewer agent, a live coding workspace, safe code execution, 
 - Provides an in-browser coding workspace with Monaco, language switching, stdin, console output, and hidden test cases.
 - Executes code in isolated Docker sandboxes with CPU, memory, process, and network restrictions.
 - Persists user sessions, transcripts, hints, code runs, and summaries in Postgres.
-
-## Why I built it
-
-I wanted a mock interview tool that felt closer to a real interview loop than a normal chatbot. Most practice tools either stop at static problems or give away too much too quickly. MockDev is built to behave more like a senior engineer interviewing a candidate, while still being useful for deliberate practice.
 
 ## Tech stack
 
@@ -71,7 +67,7 @@ Each execution runs inside a restricted Docker container with:
 
 ### 4. Persistence and auth
 
-The app uses a Postgres-backed session model plus lightweight cookie auth. I also added:
+The application uses a Postgres-backed session model plus lightweight cookie auth:
 
 - route protection
 - Zod request validation
@@ -91,18 +87,17 @@ flowchart LR
   D --> G["OpenAI models"]
 ```
 
-## Public repo note
+## Design priorities
 
-This public repository is a portfolio-safe version of the project. It is meant to document the architecture, product decisions, and implementation approach without exposing private environment configuration or internal development history.
+- Clear separation between frontend, orchestration, persistence, and execution layers
+- Safe handling of untrusted user code through isolated containerized execution
+- Session-aware interviewer behavior rather than stateless chat responses
+- Extensibility across languages, question sets, and interview modes
 
-## Highlights I would talk about in an interview
+## Repository scope
 
-- Designed a full-stack interview simulation product instead of a single chat UI.
-- Separated UI, orchestration, persistence, and sandboxed execution into distinct layers.
-- Treated untrusted code execution as an infrastructure problem, not just an API route.
-- Built for extensibility with different interview modes, question banks, and execution languages.
+This repository is the public project overview for MockDev. It documents the system architecture, feature set, and implementation approach without exposing private environment configuration or internal development history.
 
 ## Live demo
 
 - App: [interview-prepper-seven.vercel.app](https://interview-prepper-seven.vercel.app)
-
